@@ -1,1 +1,14 @@
+environment: QA
+defaults:
+  local_only: false
+  bucket: "qa-bucket"
+  gcs_path_prefix: "api-data/qa"
+  create_bucket_if_missing: true
 
+endpoints:
+  - name: population_estimates
+    url: "https://api.census.gov/data/timeseries/idb/1year?get=NAME,GENC,POP&YR=2023,2024&AGE=0:100&SEX=0,1,2&for=genc+standard+countries+and+areas:BW,NO"
+    method: "GET"
+    output_formats: ["csv", "json"]
+    local_path: "output/population"
+    gcs_path: "population"

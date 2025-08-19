@@ -1,0 +1,14 @@
+environment: PROD
+defaults:
+  local_only: false
+  bucket: "prod-bucket"
+  gcs_path_prefix: "api-data/prod"
+  create_bucket_if_missing: true
+
+endpoints:
+  - name: live_data
+    url: "https://api.census.gov/data/timeseries/healthins/sahie?get=NIC_PT,NUI_PT&for=county:*&in=state:10&time=2023"
+    method: "GET"
+    output_formats: ["csv", "txt"]
+    local_path: "output/live_data"
+    gcs_path: "live_data"

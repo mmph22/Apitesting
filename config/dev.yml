@@ -1,0 +1,21 @@
+environment: DEV
+defaults:
+  local_only: true
+  bucket: "dev-bucket"
+  gcs_path_prefix: "api-data/dev"
+  create_bucket_if_missing: true
+
+endpoints:
+  - name: census_variables
+    url: "https://api.census.gov/data/2022/acs/acs1/profile/variables.json"
+    method: "GET"
+    output_formats: ["json", "csv", "txt"]
+    local_path: "output/census"
+    gcs_path: "census"
+
+  - name: health_insurance
+    url: "https://api.census.gov/data/timeseries/healthins/sahie?get=NIC_PT,NAME,NUI_PT,YEAR&for=county:*&in=state:01&AGECAT=0&SEXCAT=0&IPRCAT=0"
+    method: "GET"
+    output_formats: ["csv"]
+    local_path: "output/health_insurance"
+    gcs_path: "health_insurance"
